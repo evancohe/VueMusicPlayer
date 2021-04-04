@@ -1,0 +1,142 @@
+body {
+  font-family: "Noto Sans SC", sans-serif;
+  background-color: teal;
+}
+
+#player {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: gray;
+  color: rgba(255, 255, 255, 0.493);
+  width: 75%;
+  height: 600px;
+  margin: 3% auto;
+  border-radius: 18px;
+  background: #008080;
+  box-shadow: 20px 20px 60px #006d6d, -20px -20px 60px #009393;
+  overflow: hidden;
+}
+
+/* header */
+.player-header {
+  height: 10%;
+  background-color: rgb(1, 92, 92);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-title {
+  background-color: rgb(1, 92, 92);
+  padding: 10px 20px;
+  font-size: 12px;
+}
+
+.searchField {
+  background-color: rgb(1, 92, 92);
+  color: rgba(255, 255, 255, 0.493);
+  padding: 5px 5px;
+}
+
+.searchTerm {
+  color: rgba(255, 255, 255, 0.493);
+  background-color: rgb(1, 92, 92);
+  padding: 5px 5px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.493);
+  outline: none;
+}
+
+.searchBtn {
+  background-color: rgb(1, 92, 92);
+  color: rgba(255, 255, 255, 0.493);
+  padding: 5px 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* body */
+
+.player-body {
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+ul {
+  list-style-type: none;
+  margin: 1px auto;
+  padding: 5px 15px;
+}
+
+li {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+li:hover {
+  color: rgba(255, 255, 255, 0.39);
+}
+
+.song-list {
+  width: 30%;
+}
+
+.album-cover {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 30%;
+}
+
+.album-cover img {
+  object-fit: contain;
+  width: 85%;
+  opacity: 0.6;
+}
+
+.comments {
+  width: 30%;
+}
+
+.comments li {
+  border: none;
+  border-bottom: 1px solid;
+}
+
+/* footer */
+.player-footer {
+  position: relative;
+
+  height: 10%;
+}
+.my-audio {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  bottom: 0;
+  height: 30px;
+  opacity: 0.4;
+  outline: none;
+}
+
+input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: rgba(255, 255, 255, 0.493);
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: rgba(255, 255, 255, 0.493);
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: rgba(255, 255, 255, 0.493);
+}
+input:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  color: rgba(255, 255, 255, 0.493);
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Music Player</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="player">
+      <section class="player-header">
+        <span class="header-title">Vue Player</span>
+        <div class="searchField">
+          <input
+            v-on:keyup.enter="searchSong"
+            v-model="searchVal"
+            class="searchTerm"
+            type="text"
+            placeholder="歌曲名"
+          />
+          <input
+            v-on:click="searchSong"
+            class="searchBtn"
+            type="button"
+            value="搜索"
+          />
+        </div>
+      </section>
+
+      <section class="player-body">
+        <div class="song-list">
+          <ul>
+            <li v-for="i in songArr" v-on:click="playMusic(i.id)">
+              {{i.name}}<br />
+            </li>
+          </ul>
+        </div>
+        <div class="album-cover">
+          <img v-bind:src="musicCover" alt="music cover" />
+        </div>
+        <div class="comments">
+          <ul>
+            <li v-for="comment in commentArr">
+              <strong>{{comment.user.nickname}}:</strong><br />
+              {{comment.content}}
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="player-footer">
+        <audio
+          class="my-audio"
+          v-bind:src="musicUrl"
+          controls="controls"
+          autoplay="autoplay"
+          loop="loop"
+        ></audio>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      var data = {
+        searchVal: "",
+        songArr: [],
+        commentArr: [],
+        musicUrl: "",
+        musicCover: "/headphones.png",
+      };
+      var app = new Vue({
+        el: "#player",
+        data: data,
+        methods: {
+          searchSong: function () {
+            var that = this;
+            axios
+              .get("https://autumnfish.cn/search?keywords=" + this.searchVal)
+              .then(function (response) {
+                that.songArr = response.data.result.songs;
+                console.log(response);
+              }),
+              function (err) {
+                console.log(err);
+              };
+          },
+          playMusic: function (musicId) {
+            var that = this;
+            axios
+              .get("https://autumnfish.cn/song/url?id=" + musicId)
+              .then(function (response) {
+                console.log(response);
+                that.musicUrl = response.data.data[0].url;
+              }),
+              function (err) {
+                console.log(err);
+              };
+
+            axios
+              .get("https://autumnfish.cn/song/detail?ids=" + musicId)
+              .then(function (response) {
+                console.log(response);
+                that.musicCover = response.data.songs[0].al.picUrl;
+              }),
+              function (err) {
+                console.log(err);
+              };
+
+            axios
+              .get("https://autumnfish.cn/comment/hot?type=0&id=" + musicId)
+              .then(function (response) {
+                console.log(response);
+                that.commentArr = response.data.hotComments;
+              }),
+              function (err) {
+                console.log(err);
+              };
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
